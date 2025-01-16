@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Access</title>
+    <style>
+        .admin-panel {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .admin-button {
+            background: #00ffff;
+            color: black;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            margin: 5px;
+        }
+
+        body {
+            margin: 0;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #001a2c, #000913);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .preview-container {
+            width: 100%;
+            height: 500px;
+            margin: 10px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #00ffff;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #00ffff;
+            border-radius: 4px;
+            background: rgba(0, 26, 44, 0.5);
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .pay-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #00ffff, #0088ff);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            border: 1px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        h1 {
+            color: #00ffff;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .warning {
+            color: #ff4444;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .features {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .features ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .features li {
+            margin: 5px 0;
+        }
+
+        .slides {
+            width: 100%;
+            height: 300px;
+            margin: 10px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #00ffff;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Project Preview</h1>
+
+        <div class="slides">
+            <!-- Replace these image URLs with your actual screenshot URLs -->
+            <div class="slide active">
+                <img src="1_20250115_212526_0000.png" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="2_20250115_212527_0001.png" alt="Slide 2">
+            </div>
+            <div class="slide">
+                <img src="3_20250115_212528_0002.png" alt="Slide 3">
+            </div>
+
+            <div class="slide">
+                <img src="4_20250115_212533_0003.png" alt="Slide 4">
+            </div>
+
+            <div class="slide">
+                <img src="5_20250115_212538_0004.png" alt="Slide 5">
+            </div>
+
+            <div class="slide">
+                <img src="24_20250115_212655_0023.png" alt="Slide 6">
+            </div>
+
+            <div class="slide">
+                <img src="25_20250115_212700_0024.png" alt="Slide 7">
+            </div>
+
+            <div class="slide">
+                <img src="26_20250115_212701_0025.png" alt="Slide 8">
+            </div>
+
+            <div class="slide">
+                <img src="27_20250115_212702_0026.png" alt="Slide 9">
+            </div>
+
+            <div class="slide">
+                <img src="28_20250115_212705_0027.png" alt="Slide 10">
+            </div>
+
+        </div>
+
+        <div class="features">
+            <h3 style="color: #00ffff; margin-top: 0;">What you'll get:</h3>
+            <ul>
+                <li>Full editable access to the template</li>
+                <li>All design elements included 28 Slides</li>
+                <li>Instant access after payment</li>
+                <li>Link delivered to your Gmail</li>
+            </ul>
+        </div>
+
+        <input type="email" placeholder="Enter Gmail address" id="email">
+        <p class="warning">* Editable link will be sent to this email after payment verification</p>
+
+        <button class="pay-button" onclick="pay()">Pay ₹50 with PhonePe</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, 3000);
+        // Payment function
+        function pay() {
+            const email = document.getElementById('email').value;
+            if (!email) {
+                alert('Please enter your Gmail address');
+                return;
+            }
+
+            if (!email.endsWith('@gmail.com')) {
+                alert('Please enter a valid Gmail address');
+                return;
+            }
+
+            // Store email before redirecting
+            localStorage.setItem('userEmail', email);
+
+            // PhonePe UPI deep link
+            const upiUrl = `upi://pay?pa=8719803542@ybl&pn=ProjectAccess&am=50.00&cu=INR`;
+            window.location.href = upiUrl;
+        }
+
+        // Check if returning from payment
+        if (document.referrer.includes('phonepe')) {
+            const email = localStorage.getItem('userEmail');
+            if (email) {
+                alert('If payment was successful, you will receive the link on your Gmail: ' + email);
+            }
+        }
+        function sendAccessEmail(userEmail) {
+            // The editable project link
+            const projectLink = "https://www.canva.com/design/DAGcRtQwJ1U/nc1VTOK2OmY4BfLmjBLABQ/edit";
+
+            // Email content
+            const emailContent = `
+                Thank you for your payment!
+                
+                Here's your editable Canva project link:
+                ${projectLink}
+                
+                Enjoy creating!
+            `;
+
+            // Using EmailJS to send email
+            Email.send({
+                SecureToken: "d81bede7-f483-438b-a5db-5246fa6fafe1", // Get this from smtp.js
+                To: userEmail,
+                From: "ashgoldenera@gmail.com",
+                Subject: "Canva Project Access",
+                Body: emailContent
+            }).then(
+                message => alert("Access link sent! Check your email")
+            );
+        }
+
+        // Modified payment function
+        function pay() {
+            const email = document.getElementById('email').value;
+            if (!email) {
+                alert('Please enter your Gmail address');
+                return;
+            }
+
+            if (!email.endsWith('@gmail.com')) {
+                alert('Please enter a valid Gmail address');
+                return;
+            }
+
+            // Store email before redirecting
+            localStorage.setItem('pendingEmail', email);
+            localStorage.setItem('paymentTimestamp', new Date().getTime());
+
+            // PhonePe UPI deep link
+            const upiUrl = `upi://pay?pa=8719803542@ybl&pn=ProjectAccess&am=50.00&cu=INR`;
+            window.location.href = upiUrl;
+        }
+
+        // Check for admin access
+        const adminPass = "982634"; // Change this!
+
+        function showAdminPanel() {
+            const pass = prompt("Enter admin password:");
+            if (pass === adminPass) {
+                document.querySelector('.admin-panel').style.display = 'block';
+            }
+        }
+
+        // Function to manually send access
+        function manualSendAccess() {
+            const email = prompt("Enter user's Gmail:");
+            if (email && email.endsWith('@gmail.com')) {
+                sendAccessEmail(email);
+            }
+        }
+    </script>
+
+    <!-- Add this at the bottom of your body tag -->
+    <div class="admin-panel">
+        <h3>Admin Controls</h3>
+        <button class="admin-button" onclick="manualSendAccess()">Send Access Link</button>
+    </div>
+
+    <button onclick="showAdminPanel()" style="position: fixed; bottom: 10px; right: 10px; opacity: 0.1;">Admin</button>
+</body>
+</body>
+
+</html>
